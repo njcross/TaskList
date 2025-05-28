@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import type { Task } from '../models/Task.model';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const defaultTask: Task = {
   id: '',
@@ -16,6 +17,7 @@ const TaskForm: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const navigate = useNavigate();
   const { id } = useParams();
+  const { user } = useAuth0();
 
   useEffect(() => {
     if (id) {
@@ -45,9 +47,10 @@ const TaskForm: React.FC = () => {
     if (!validate()) return;
 
     const finalTask = {
-      ...task,
-      id: id || Math.random().toString(36).substr(2, 9),
-    };
+        ...task,
+        id: id || Math.random().toString(36).substr(2, 9),
+        userId: user?.sub, 
+      };
 
     sessionStorage.setItem(finalTask.id, JSON.stringify(finalTask));
     alert(`Task saved with ID: ${finalTask.id}`);

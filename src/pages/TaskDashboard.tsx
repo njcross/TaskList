@@ -11,7 +11,7 @@ const TaskDashboard: React.FC = () => {
 
   useEffect(() => {
     if (user && !isLoading) {
-      const allTasks: Task[] = [];
+      const userTasks: Task[] = [];
 
       for (let i = 0; i < sessionStorage.length; i++) {
         const key = sessionStorage.key(i);
@@ -21,20 +21,22 @@ const TaskDashboard: React.FC = () => {
           const raw = sessionStorage.getItem(key);
           if (!raw) continue;
           const task: Task = JSON.parse(raw);
-          // Optional: filter by user.sub if tasks are user-specific
-          allTasks.push(task);
+
+          // ✅ Only include tasks matching current user
+          if (task.userId === user.sub) {
+            userTasks.push(task);
+          }
         } catch (e) {
           console.warn(`Invalid task at ${key}`);
         }
       }
 
-      setTasks(allTasks);
+      setTasks(userTasks);
     }
   }, [user, isLoading]);
 
   const handleDelete = (id: string) => {
-    const confirm = window.confirm("Are you sure you want to delete this task?");
-    if (!confirm) return;
+    if (!window.confirm("Are you sure you want to delete this task?")) return;
 
     sessionStorage.removeItem(id);
     setTasks((prev) => prev.filter((task) => task.id !== id));
