@@ -2,7 +2,7 @@
 // Example of logging in and obtaining a JWT token from reqres.in using Axios
 import { useState } from 'react';
 import axios from 'axios';
-import User from './User';
+import User from './User'; // Import the User component to display user data
 
 const Login: React.FC = () => {
   // State variables to store user credentials

@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
               <>
                 <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                 <Nav.Link as={Link} to="/tasks">Tasks</Nav.Link>
-                <Nav.Link as={Link} to="/content">Content</Nav.Link>
+                <Nav.Link as={Link} to="/create">Create</Nav.Link>
               </>
             )}
           </Nav>
@@ -31,7 +31,7 @@ const NavBar: React.FC = () => {
                 variant="outline-danger"
                 onClick={() =>
                   logout({
-                    logoutParams: { returnTo: window.location.origin }
+                    logoutParams: { returnTo: "http://localhost:5173" }
                   })
                 }
               >

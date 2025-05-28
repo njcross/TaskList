@@ -5,15 +5,14 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import CallbackPage from "./components/CallbackPage";
 import { useAuth0 } from "@auth0/auth0-react";
-import ProfilePage from "./components/ProfilePage";
 import AuthenticationGuard from "./components/AuthenticationGuard";
-import ContentPage from "./components/ContentPage";
 import { AuthProvider } from "./context/AuthContext";
 import { TaskProvider } from "./context/TaskContext";
 import TaskDashboard from "./pages/TaskDashboard";
 import TaskDetails from "./pages/TaskDetails";
 import TaskForm from "./pages/TaskForm";
 import NavBar from "./components/NavBar";
+import Profile from "./pages/Profile";
 
 const App: React.FC = () => {
 
@@ -29,7 +28,7 @@ const App: React.FC = () => {
       <Route path="/home" element={<HomePage />} />
       <Route
         path="/profile"
-        element={<AuthenticationGuard component={ProfilePage} />}
+        element={<AuthenticationGuard component={Profile} />}
       />
       <Route 
         path="/tasks"
@@ -50,10 +49,6 @@ const App: React.FC = () => {
       <Route
         path="/task/edit/:id"
         element={<AuthenticationGuard component={TaskForm} />}
-      />
-      <Route 
-        path="/content"
-        element={<AuthenticationGuard component={ContentPage} />}
       />
       <Route path="/authorize" element={<CallbackPage />} />
     </Routes>
