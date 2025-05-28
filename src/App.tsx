@@ -9,6 +9,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import ProfilePage from "./components/ProfilePage";
 import AuthenticationGuard from "./components/AuthenticationGuard";
 import ContentPage from "./components/ContentPage";
+import { AuthProvider } from "./context/AuthContext";
+import { TaskProvider } from "./context/TaskContext";
+import TaskDashboard from "./pages/TaskDashboard";
+import TaskDetails from "./pages/TaskDetails";
+import TaskForm from "./pages/TaskForm";
 
 const App: React.FC = () => {
 
@@ -17,15 +22,33 @@ const App: React.FC = () => {
   if(isLoading) return (<div>Loading...</div>)
 
   return (
+    <TaskProvider>
+    <AuthProvider>
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
       <Route
         path="/profile"
         element={<AuthenticationGuard component={ProfilePage} />}
       />
       <Route 
         path="/tasks"
-        element={<AuthenticationGuard component={TaskListPage} />}
+        element={<AuthenticationGuard component={TaskDashboard} />}
+      />
+      <Route
+          path="/"
+          element={<AuthenticationGuard component={TaskDashboard} />}
+        />
+      <Route
+          path="/task/:id"
+          element={<AuthenticationGuard component={TaskDetails} />}
+        />
+      <Route
+        path="/create"
+        element={<AuthenticationGuard component={TaskForm} />}
+      />
+      <Route
+        path="/edit/:id"
+        element={<AuthenticationGuard component={TaskForm} />}
       />
       <Route 
         path="/content"
@@ -33,6 +56,8 @@ const App: React.FC = () => {
       />
       <Route path="/authorize" element={<CallbackPage />} />
     </Routes>
+    </AuthProvider>
+    </TaskProvider>
   );
 };
 

@@ -1,7 +1,7 @@
-// Task.model.tsx
 export interface Task {
     id: string;
     title: string;
-    description?: string;
-    status: string;
-}
+    description: string;
+    status: 'pending' | 'in-progress' | 'completed';
+    dueDate: string;
+  }
