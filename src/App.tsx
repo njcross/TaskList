@@ -4,7 +4,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import CallbackPage from "./components/CallbackPage";
-import TaskListPage from "./components/TaskListPage";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProfilePage from "./components/ProfilePage";
 import AuthenticationGuard from "./components/AuthenticationGuard";
@@ -14,6 +13,7 @@ import { TaskProvider } from "./context/TaskContext";
 import TaskDashboard from "./pages/TaskDashboard";
 import TaskDetails from "./pages/TaskDetails";
 import TaskForm from "./pages/TaskForm";
+import NavBar from "./components/NavBar";
 
 const App: React.FC = () => {
 
@@ -24,6 +24,7 @@ const App: React.FC = () => {
   return (
     <TaskProvider>
     <AuthProvider>
+    <NavBar />
     <Routes>
       <Route path="/home" element={<HomePage />} />
       <Route
