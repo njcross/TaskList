@@ -48,7 +48,7 @@ const App: React.FC = () => {
         element={<AuthenticationGuard component={TaskForm} />}
       />
       <Route
-        path="/edit/:id"
+        path="/task/edit/:id"
         element={<AuthenticationGuard component={TaskForm} />}
       />
       <Route 

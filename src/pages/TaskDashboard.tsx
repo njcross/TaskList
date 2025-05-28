@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
+import Button from "../components/Button";
 import type { Task } from "../models/Task.model";
 import { Link } from "react-router-dom";
 
@@ -20,7 +21,7 @@ const TaskDashboard: React.FC = () => {
           const raw = sessionStorage.getItem(key);
           if (!raw) continue;
           const task: Task = JSON.parse(raw);
-          // Optional: filter tasks by user.sub if you store that
+          // Optional: filter by user.sub if tasks are user-specific
           allTasks.push(task);
         } catch (e) {
           console.warn(`Invalid task at ${key}`);
@@ -31,6 +32,14 @@ const TaskDashboard: React.FC = () => {
     }
   }, [user, isLoading]);
 
+  const handleDelete = (id: string) => {
+    const confirm = window.confirm("Are you sure you want to delete this task?");
+    if (!confirm) return;
+
+    sessionStorage.removeItem(id);
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
+
   return (
     <Container>
       <h1>Task Dashboard</h1>
@@ -39,10 +48,23 @@ const TaskDashboard: React.FC = () => {
         <p>No tasks found.</p>
       ) : (
         tasks.map((task) => (
-          <div key={task.id}>
-            <h5>{task.title}</h5>
-            <p>{task.description}</p>
-          </div>
+          <Card key={task.id} className="mb-3">
+            <Card.Body>
+              <Card.Title>{task.title}</Card.Title>
+              <Card.Text>{task.description}</Card.Text>
+              <Card.Text>Status: {task.status}</Card.Text>
+              <Card.Text>Due: {task.dueDate}</Card.Text>
+              <Button variant="info" as={Link} to={`/task/${task.id}`} className="me-2">
+                Details
+              </Button>
+              <Button variant="warning" as={Link} to={`/task/edit/${task.id}`} className="me-2">
+                Edit
+              </Button>
+              <Button variant="danger" onClick={() => handleDelete(task.id)}>
+                Delete
+              </Button>
+            </Card.Body>
+          </Card>
         ))
       )}
     </Container>
