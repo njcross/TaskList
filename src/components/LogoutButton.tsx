@@ -1,11 +1,10 @@
-//LogoutButton.tsx
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "react-bootstrap";
 import React, { useState } from "react";
+import styles from './LogoutButton.module.css';
 
 const LogoutButton: React.FC = () => {
   const { logout, isAuthenticated } = useAuth0();
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState('');
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -17,8 +16,15 @@ const LogoutButton: React.FC = () => {
     });
   };
 
-  if(isAuthenticated) return (<Button onClick={handleLogout}>Log Out</Button>)
+  if (isAuthenticated) {
+    return (
+      <button className={styles.logoutButton} onClick={handleLogout}>
+        Log Out
+      </button>
+    );
+  }
+
   return null;
-}
+};
 
 export default LogoutButton;

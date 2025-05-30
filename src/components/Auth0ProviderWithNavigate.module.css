@@ -1,0 +1,20 @@
+.auth0providerwithnavigateContainer {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 1rem auto;
+  max-width: 800px;
+}
+
+.auth0providerwithnavigateTitle {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.auth0providerwithnavigateContent {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}

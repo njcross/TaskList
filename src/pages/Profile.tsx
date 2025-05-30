@@ -1,7 +1,7 @@
-// src/pages/ProfilePage.tsx
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
+import styles from './ProfilePage.module.css';
 
 const Profile: React.FC = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -17,8 +17,8 @@ const Profile: React.FC = () => {
   if (!isAuthenticated) {
     return (
       <Container className="py-4">
-        <h1>Profile</h1>
-        <p>You are not authenticated.</p>
+        <h1 className={styles.heading}>Profile</h1>
+        <p className={styles.message}>You are not authenticated.</p>
       </Container>
     );
   }
@@ -26,15 +26,15 @@ const Profile: React.FC = () => {
   if (!user) {
     return (
       <Container className="py-4">
-        <h1>Profile</h1>
-        <p>No user profile available.</p>
+        <h1 className={styles.heading}>Profile</h1>
+        <p className={styles.message}>No user profile available.</p>
       </Container>
     );
   }
 
   return (
-    <Container className="py-4">
-      <h1>Profile</h1>
+    <Container className={`py-4 ${styles.profileContainer}`}>
+      <h1 className={styles.heading}>Profile</h1>
       <Row className="mt-4">
         <Col xs={12} md={4} className="text-center mb-4">
           {user.picture && (
@@ -43,19 +43,21 @@ const Profile: React.FC = () => {
               alt={user.name}
               roundedCircle
               fluid
-              style={{ maxWidth: "150px" }}
+              className={styles.avatar}
             />
           )}
           <h4 className="mt-3">{user.name}</h4>
           <p className="text-muted">{user.email}</p>
         </Col>
         <Col xs={12} md={8}>
-          <h5>User Details</h5>
-          {Object.entries(user).map(([key, value], index) => (
-            <p key={index}>
-              <strong>{key}</strong>: {JSON.stringify(value)}
-            </p>
-          ))}
+          <h5 className={styles.subheading}>User Details</h5>
+          <div className={styles.details}>
+            {Object.entries(user).map(([key, value], index) => (
+              <p key={index}>
+                <strong>{key}</strong>: {JSON.stringify(value)}
+              </p>
+            ))}
+          </div>
         </Col>
       </Row>
     </Container>

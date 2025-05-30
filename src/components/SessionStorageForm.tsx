@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import styles from './SessionStorageForm.module.css';
 
 const SessionStorageForm: React.FC = () => {
   const [keyInput, setKeyInput] = useState<string>("");
   const [valueInput, setValueInput] = useState<string>("");
 
   const saveToSessionStorage = () => {
-    // Check if key and value are not empty
     if (keyInput && valueInput) {
-      // Save to session storage
       sessionStorage.setItem(keyInput, valueInput);
-
-      // Clear input fields
       setKeyInput("");
       setValueInput("");
-
-      // Log success message
       console.log(`Stored: ${keyInput} - ${valueInput}`);
     } else {
       alert("Please enter both key and value.");
@@ -23,18 +18,14 @@ const SessionStorageForm: React.FC = () => {
   };
 
   const clearSessionStorage = () => {
-    // Clear all data from session storage
     sessionStorage.clear();
-
-    // Log success message
     console.log("Session Storage cleared.");
-
-    // Optionally, you can provide feedback to the user
     alert("Session Storage cleared.");
   };
 
   return (
-    <Container>
+    <Container className={styles.formContainer}>
+      <h2 className={styles.title}>Session Storage Form</h2>
       <Form>
         <Form.Group>
           <Form.Label>Key</Form.Label>
@@ -44,6 +35,7 @@ const SessionStorageForm: React.FC = () => {
             value={keyInput}
             onChange={(e) => setKeyInput(e.target.value)}
             required
+            className={styles.input}
           />
         </Form.Group>
         <Form.Group>
@@ -54,13 +46,14 @@ const SessionStorageForm: React.FC = () => {
             value={valueInput}
             onChange={(e) => setValueInput(e.target.value)}
             required
+            className={styles.input}
           />
         </Form.Group>
 
         <Row>
           <Col>
             <Button
-              className="m-3"
+              className={`${styles.button} m-3`}
               type="submit"
               onClick={saveToSessionStorage}
             >
@@ -69,8 +62,9 @@ const SessionStorageForm: React.FC = () => {
           </Col>
           <Col>
             <Button
-              className="m-3 float-right"
+              className={`${styles.button} m-3 float-right`}
               type="button"
+              variant="danger"
               onClick={clearSessionStorage}
             >
               Clear Session Storage

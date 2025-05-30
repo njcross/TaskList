@@ -1,0 +1,18 @@
+
+
+.homeContainer {
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  text-align: center;
+}
+
+.heading {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+}

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import type { Task } from '../models/Task.model';
 import { useAuth0 } from "@auth0/auth0-react";
+import styles from './TaskForm.module.css';
 
 const defaultTask: Task = {
   id: '',
@@ -47,10 +48,10 @@ const TaskForm: React.FC = () => {
     if (!validate()) return;
 
     const finalTask = {
-        ...task,
-        id: id || Math.random().toString(36).substr(2, 9),
-        userId: user?.sub, 
-      };
+      ...task,
+      id: id || Math.random().toString(36).substr(2, 9),
+      userId: user?.sub,
+    };
 
     sessionStorage.setItem(finalTask.id, JSON.stringify(finalTask));
     alert(`Task saved with ID: ${finalTask.id}`);
@@ -63,8 +64,8 @@ const TaskForm: React.FC = () => {
   };
 
   return (
-    <Container>
-      <h2>{id ? 'Edit Task' : 'Create Task'}</h2>
+    <Container className={styles.taskFormContainer}>
+      <h2 className={styles.formTitle}>{id ? 'Edit Task' : 'Create Task'}</h2>
       <Form onSubmit={handleSaveToSessionStorage}>
         <Form.Group className="mb-3">
           <Form.Label>Title</Form.Label>
@@ -115,12 +116,12 @@ const TaskForm: React.FC = () => {
 
         <Row>
           <Col>
-            <Button type="submit" className="m-2">
+            <Button type="submit" className={styles.saveButton}>
               Save to Session Storage
             </Button>
           </Col>
           <Col>
-            <Button type="button" className="m-2 float-end" onClick={clearForm}>
+            <Button type="button" className={styles.clearButton} onClick={clearForm}>
               Clear Form
             </Button>
           </Col>

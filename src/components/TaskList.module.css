@@ -1,0 +1,41 @@
+.card {
+  margin-bottom: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: #f8f9fa;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.body {
+  padding: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: #495057;
+}
+
+.status {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.75rem;
+}
+
+.status.todo {
+  color: #0d6efd;
+}
+
+.status.inprogress {
+  color: #ffc107;
+}
+
+.status.completed {
+  color: #198754;
+}

@@ -1,0 +1,30 @@
+.authenticationguardContainer {
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 1rem auto;
+  max-width: 800px;
+}
+
+.authenticationguardTitle {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.authenticationguardContent {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.authguardMessage {
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center;
+  background-color: #f9f9f9;
+  border: 1px dashed #bbb;
+  border-radius: 8px;
+}

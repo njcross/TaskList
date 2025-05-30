@@ -1,0 +1,23 @@
+.pageLayoutWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-main, #f8f9fa);
+}
+
+.pageContent {
+  flex: 1;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-heading, #212529);
+  text-align: center;
+}
+
+.footer {
+  margin-top: 2rem;
+  text-align: center;
+}

@@ -4,6 +4,7 @@ import { Card, Container } from "react-bootstrap";
 import Button from "../components/Button";
 import type { Task } from "../models/Task.model";
 import { Link } from "react-router-dom";
+import styles from './TaskDashboard.module.css';
 
 const TaskDashboard: React.FC = () => {
   const { user, isLoading } = useAuth0();
@@ -22,7 +23,6 @@ const TaskDashboard: React.FC = () => {
           if (!raw) continue;
           const task: Task = JSON.parse(raw);
 
-          // ✅ Only include tasks matching current user
           if (task.userId === user.sub) {
             userTasks.push(task);
           }
@@ -37,34 +37,37 @@ const TaskDashboard: React.FC = () => {
 
   const handleDelete = (id: string) => {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
-
     sessionStorage.removeItem(id);
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
   return (
-    <Container>
-      <h1>Task Dashboard</h1>
-      <Link to="/create">Create New Task</Link>
+    <Container className={styles.dashboardContainer}>
+      <h1 className={styles.heading}>Task Dashboard</h1>
+      <Link to="/create" className={styles.createLink}>+ Create New Task</Link>
+
       {tasks.length === 0 ? (
-        <p>No tasks found.</p>
+        <p className={styles.emptyMessage}>No tasks found.</p>
       ) : (
         tasks.map((task) => (
-          <Card key={task.id} className="mb-3">
+          <Card key={task.id} className={styles.taskCard}>
             <Card.Body>
-              <Card.Title>{task.title}</Card.Title>
+              <Card.Title className={styles.title}>{task.title}</Card.Title>
               <Card.Text>{task.description}</Card.Text>
-              <Card.Text>Status: {task.status}</Card.Text>
-              <Card.Text>Due: {task.dueDate}</Card.Text>
-              <Button variant="info" as={Link} to={`/task/${task.id}`} className="me-2">
-                Details
-              </Button>
-              <Button variant="warning" as={Link} to={`/task/edit/${task.id}`} className="me-2">
-                Edit
-              </Button>
-              <Button variant="danger" onClick={() => handleDelete(task.id)}>
-                Delete
-              </Button>
+              <Card.Text><strong>Status:</strong> {task.status}</Card.Text>
+              <Card.Text><strong>Due:</strong> {task.dueDate}</Card.Text>
+
+              <div className={styles.buttonGroup}>
+                <Button variant="info" as={Link} to={`/task/${task.id}`} className="me-2">
+                  Details
+                </Button>
+                <Button variant="warning" as={Link} to={`/task/edit/${task.id}`} className="me-2">
+                  Edit
+                </Button>
+                <Button variant="danger" onClick={() => handleDelete(task.id)}>
+                  Delete
+                </Button>
+              </div>
             </Card.Body>
           </Card>
         ))

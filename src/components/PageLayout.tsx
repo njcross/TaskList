@@ -1,7 +1,7 @@
-//PageLayout.tsx
 import { Col, Container } from "react-bootstrap";
 import NavBar from "./NavBar";
 import NavBarButtons from "./NavBarButtons";
+import styles from "./PageLayout.module.css";
 
 type PageLayoutProps = {
   children?: React.ReactNode;
@@ -9,16 +9,18 @@ type PageLayoutProps = {
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   return (
-    <Container>
-      <Col>
+    <div className={styles.pageLayoutWrapper}>
       <NavBar />
-      </Col>
-      <h1>My App</h1>
-      {children}
-      <footer>
-        <NavBarButtons />
-      </footer>
-    </Container>
+      <Container className={styles.pageContent}>
+        <Col>
+          <h1 className={styles.title}>My App</h1>
+          {children}
+          <footer className={styles.footer}>
+            <NavBarButtons />
+          </footer>
+        </Col>
+      </Container>
+    </div>
   );
 };
 

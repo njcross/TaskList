@@ -1,29 +1,41 @@
-//Status.tsx
+import React from 'react';
+import styles from './Status.module.css';
+
 export type StatusProp = {
-    status: 'loading' | 'error' | 'success';
-}
+  status: 'loading' | 'error' | 'success';
+};
 
 const Status: React.FC = () => {
+  const statusInput: StatusProp = {
+    status: 'loading', // You can replace this with dynamic props or context
+  };
 
-    const statusInput: StatusProp = { 
-        status: 'loading'
-    }
+  let message: string;
+  let statusClass = '';
 
-    let message
-    if(statusInput.status === 'loading'){
-        message = 'Loading...';
-    }else if(statusInput.status === 'error'){
-        message = 'Error fetching data';
-    }else if(statusInput.status === 'success'){
-        message = 'Data fetched successfully';
-    }
+  switch (statusInput.status) {
+    case 'loading':
+      message = 'Loading...';
+      statusClass = styles.loading;
+      break;
+    case 'error':
+      message = 'Error fetching data';
+      statusClass = styles.error;
+      break;
+    case 'success':
+      message = 'Data fetched successfully';
+      statusClass = styles.success;
+      break;
+    default:
+      message = 'Unknown status';
+  }
 
-    return (
-        <div>
-        <h1>Status</h1>
-        <p>{message}</p>
-        </div>
-    );
-}
+  return (
+    <div className={styles.statusContainer}>
+      <h1 className={styles.title}>Status</h1>
+      <p className={statusClass}>{message}</p>
+    </div>
+  );
+};
 
 export default Status;

@@ -1,6 +1,5 @@
-// Button.tsx or ButtonExercise.tsx
-import './Button.css';
 import React from 'react';
+import styles from './Button.module.css';
 
 export type ButtonSize = "small" | "medium" | "large";
 export type ButtonVariant =
@@ -13,7 +12,6 @@ export type ButtonVariant =
   | "light"
   | "dark";
 
-// Generic polymorphic props
 type ButtonOwnProps<E extends React.ElementType = 'button'> = {
   size?: ButtonSize;
   variant?: ButtonVariant;
@@ -30,9 +28,12 @@ const Button = <E extends React.ElementType = 'button'>({
   ...rest
 }: ButtonOwnProps<E>) => {
   const Component = as || 'button';
-  const classes = `button ${size} btn-${variant} ${className}`;
+  const sizeClass = styles[size];
+  const variantClass = styles[`btn${variant.charAt(0).toUpperCase() + variant.slice(1)}`];
+  const combined = `${styles.button} ${sizeClass} ${variantClass} ${className}`.trim();
+
   return (
-    <Component className={classes} {...rest}>
+    <Component className={combined} {...rest}>
       {children}
     </Component>
   );

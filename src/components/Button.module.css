@@ -1,0 +1,66 @@
+.button {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+/* Size variants */
+.small {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+}
+
+.medium {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.large {
+  font-size: 1.25rem;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Color variants */
+.btnPrimary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnSecondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btnSuccess {
+  background-color: #28a745;
+  color: white;
+}
+
+.btnDanger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btnWarning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btnInfo {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btnLight {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.btnDark {
+  background-color: #343a40;
+  color: white;
+}

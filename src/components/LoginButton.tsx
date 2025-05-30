@@ -1,6 +1,5 @@
-// LoginButton.tsx
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "react-bootstrap";
+import styles from './LoginButton.module.css';
 
 const LoginButton: React.FC = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
@@ -16,7 +15,14 @@ const LoginButton: React.FC = () => {
     });
   };
 
-  if(!isAuthenticated) return (<Button onClick={handleLogin}>Log In</Button>)
+  if (!isAuthenticated) {
+    return (
+      <button className={styles.loginButton} onClick={handleLogin}>
+        Log In
+      </button>
+    );
+  }
+
   return null;
 };
 
